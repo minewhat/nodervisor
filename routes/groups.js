@@ -7,9 +7,14 @@ exports.groups = function(params) {
 	var db = params.db;
 	return function(req, res) {
 
-		if ((!req.session.loggedIn) || (req.session.user.Role != 'Admin')) {
+		if (!req.session.loggedIn) {
 			res.redirect('/login');
-		} else if (req.body.delete !== undefined) {
+		}
+		if (req.session.user.Role != 'Admin') {
+			res.redirect('/dashboard');
+		}
+
+		if (req.body.delete !== undefined) {
 			if (req.params.idGroup) {
 				params.db('groups').delete()
 				.where('idGroup', req.params.idGroup)

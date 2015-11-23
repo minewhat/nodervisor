@@ -1,7 +1,7 @@
 <div class="header-container">
     <header class="header-wrapper clearfix">
         <h1 class="title"><a href="/" style="text-decoration: none; color: white;">Nodervisor</a></h1>
-        <% if ((typeof notLoggedIn == 'undefined') && (typeof hideMenu == 'undefined')) { %>
+        <% if ((typeof notLoggedIn == 'undefined') && (typeof hideMenu == 'undefined' || !hideMenu)) { %>
 	        <nav>
 	            <ul>
 	                <%
@@ -17,7 +17,7 @@
                             <li><a href="/dashboard">Dash</a></li>
                             <li><a href="/logout">Logout</a></li>
                             <%
-						}
+						        }
 	                %>
 	            </ul>
 	        </nav>

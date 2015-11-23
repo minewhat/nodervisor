@@ -5,9 +5,13 @@
 exports.log = function(params) {
 	var config = params.config;
 	return function(req, res) {
-		
+
 		if (!req.session.loggedIn) {
 			res.redirect('/login');
+		}
+
+		if (req.session.user.Role != 'Admin') {
+			res.redirect('/dashboard');
 		}
 
 		if (req.params.host && req.params.process) {

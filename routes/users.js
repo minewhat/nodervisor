@@ -4,13 +4,17 @@
 
 exports.users = function(params) {
 	return function(req, res) {
-		
-		if ((!req.session.loggedIn) || (req.session.user.Role != 'Admin')) {
+
+		if (!req.session.loggedIn) {
 			res.redirect('/login');
 		}
 
+		if (req.session.user.Role != 'Admin') {
+			res.redirect('/dashboard');
+		}
+
 		var saving = false;
-		
+
 		if (req.body.submit !== undefined) {
 			if (req.params.idUser) {
 				saving = true;

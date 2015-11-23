@@ -9,6 +9,10 @@ exports.supervisord = function(params) {
 			res.redirect('/login');
 		}
 
+		if (req.session.user.Role != 'Admin') {
+			res.redirect('/dashboard');
+		}
+
 		res.render('supervisord', {
 			title: 'Nodervisor - All Hosts',
 			session: req.session

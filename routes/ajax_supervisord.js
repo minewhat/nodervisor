@@ -11,13 +11,17 @@ exports.ajax_supervisord = function(params) {
 		if (!req.session.loggedIn) {
 			res.send({error: 'Not logged in'});
 		} else {
-		
+			if (req.session.user.Role != 'Admin') {
+				res.send({error: 'Incorrect Priviledges!'});
+				return false;
+			}
+			
 			var supervisords = {};
 			var hosts = [];
 			for (var idHost in config.hosts) {
 				hosts.push(config.hosts[idHost]);
 			}
-			
+
 			async.each(hosts, function(host, callback){
 				var supclient = supervisordapi.connect(host.Url);
 				var processinfo = supclient.getAllProcessInfo(function(err, result){

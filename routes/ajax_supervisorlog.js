@@ -11,6 +11,11 @@ exports.ajax_supervisorlog = function(params) {
 		if (!req.session.loggedIn) {
 			res.send({error: 'Not logged in'});
 		} else {
+			if (req.session.user.Role != 'Admin') {
+				res.send({error: 'Incorrect Priviledges!'});
+				return false;
+			}
+
 			var host = req.param('host');
 			var process = req.param('process');
 			var offset = parseInt(req.param('offset'), 10);
@@ -60,7 +65,7 @@ exports.ajax_supervisorlog = function(params) {
 								} else {
 									res.send({result: 'error', error: err});
 								}
-								
+
 							});
 						} else {
 							supclient.tailProcessStderrLog(process, offset, length, function(err, data){
