@@ -77,6 +77,10 @@ for (state in sortedstatuses) {
                         rowClass = 'warning';
                     }
                     break;
+                    case 'EXITED': {
+                        rowClass = 'warning';
+                    }
+                    break;
                     case 'FATAL': {
                         rowClass = 'danger';
                     }
@@ -105,16 +109,12 @@ for (state in sortedstatuses) {
                         } else {
                             changeTime = processes[i].start;
                         }
-                    	if (changeTime) {
+                    	  if (changeTime) {
                     %>
-                    		<%= moment.unix(changeTime).from(moment.unix(processes[i].now)) %>
-					<%
-                    	} else {
-					%>
-							Not started
-					<%
-						}
-					%>
+                    		    <%= moment.unix(changeTime).from(moment.unix(processes[i].now)) %>
+					          <% } else { %>
+							              Not started
+          					<% } %>
                 </td>
                 <td>
                     <%
