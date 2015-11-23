@@ -7,9 +7,7 @@ exports.supervisord = function(params) {
 
 		if (!req.session.loggedIn) {
 			res.redirect('/login');
-		}
-
-		if (req.session.user.Role != 'Admin') {
+		} else if (req.session.user.Role != 'Admin') {
 			res.redirect('/dashboard');
 		}
 

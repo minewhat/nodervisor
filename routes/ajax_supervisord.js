@@ -11,11 +11,12 @@ exports.ajax_supervisord = function(params) {
 		if (!req.session.loggedIn) {
 			res.send({error: 'Not logged in'});
 		} else {
-			if (req.session.user.Role != 'Admin') {
-				res.send({error: 'Incorrect Priviledges!'});
-				return false;
-			}
-			
+			// here should check
+			//if (req.session.user.Role != 'Admin') {
+			//	res.send({error: 'Incorrect Priviledges!'});
+			//	return false;
+			//}
+
 			var supervisords = {};
 			var hosts = [];
 			for (var idHost in config.hosts) {
