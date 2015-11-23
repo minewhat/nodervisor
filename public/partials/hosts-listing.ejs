@@ -27,6 +27,10 @@ for (state in sortedstatuses) {
             stateColor = 'warning';
         }
         break;
+        case 'EXITED': {
+            stateColor = 'warning';
+        }
+        break;
         case 'FATAL': {
             stateColor = 'danger';
         }
@@ -56,7 +60,8 @@ for (state in sortedstatuses) {
     %>
     <table class="table table-hover table-striped" style="<%= hostDisplay %>" id="<%= host.idHost %>">
         <tr>
-            <th style="width: 45%;">Process Name</th>
+            <th style="width: 35%;">Process Name</th>
+            <th style="width: 10%;">Description</th>
             <th style="width: 10%;">State</th>
             <th style="width: 20%;">Changed</th>
             <th style="width: 25%;">Actions</th>
@@ -91,6 +96,11 @@ for (state in sortedstatuses) {
                     </div>
                 </td>
                 <td>
+                    if (processes[i].state === 20) {
+                       <%= moment.unix(processes[i].now).from(moment.unix(processes[i].start)) %>
+                    }
+                </td>
+                <td>
                     <%= processes[i].statename %>
                 </td>
                 <td>
@@ -102,7 +112,11 @@ for (state in sortedstatuses) {
                             changeTime = processes[i].start;
                         }
                     %>
-                    <%= moment.unix(changeTime).from(moment.unix(processes[i].now)) %>
+                    if (changeTime) {
+                      <%= moment.unix(changeTime).from(moment.unix(processes[i].now)) %>
+                    } else {
+                      <%= Not started %>
+                    }
                 </td>
                 <td>
                     <%
