@@ -21,6 +21,7 @@ exports.log = function(params) {
 			} else {
 				data.error = "Host not found";
 			}
+
 			res.render('log', {
 				title: 'Nodervisor - Log',
 				session: req.session,

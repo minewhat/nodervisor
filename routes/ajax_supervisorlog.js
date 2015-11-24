@@ -82,6 +82,13 @@ exports.ajax_supervisorlog = function(params) {
 						}
 					}
 					break;
+					case 'clear': {
+							supclient.clearProcessLogs(process, function(err, data){
+									var d = new Array(err + data, 0, false);
+									res.send({result: 'success', data: d});
+							});
+					}
+					break;
 				}
 			} else {
 				res.send({result: 'error', message: 'Host not found'});
