@@ -29,10 +29,8 @@ exports.groups = function(params) {
 				}, 'idGroup').exec(function(err, insertId){
 					if (err !== null) {
 						console.log(err);
-						res.redirect('/groups');
-					} else {
-						res.redirect('/group/' + insertId);
 					}
+					res.redirect('/groups');
 				});
 			} else {
 				var info = {
@@ -42,7 +40,7 @@ exports.groups = function(params) {
 				params.db('groups').update(info)
 				.where('idGroup', req.params.idGroup)
 				.exec(function() {
-					res.redirect('/group/' + req.params.idGroup);
+					res.redirect('/groups');
 				});
 			}
 		} else {

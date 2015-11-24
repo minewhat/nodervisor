@@ -13,7 +13,7 @@ exports.hosts = function(params) {
 		if (req.session.user.Role != 'Admin') {
 			res.redirect('/dashboard');
 		}
-		
+
 		if (req.body.delete !== undefined) {
 			if (req.params.idHost) {
 				params.db('hosts').delete()
@@ -34,10 +34,8 @@ exports.hosts = function(params) {
 					params.config.readHosts(params.db, function(){
 						if (err !== null) {
 							console.log(err);
-							res.redirect('/hosts');
-						} else {
-							res.redirect('/host/' + insertId);
 						}
+						res.redirect('/hosts');
 					});
 				});
 			} else {
@@ -53,7 +51,7 @@ exports.hosts = function(params) {
 				.where('idHost', req.params.idHost)
 				.exec(function() {
 					params.config.readHosts(params.db, function(){
-						res.redirect('/host/' + req.params.idHost);
+						res.redirect('/hosts');
 					});
 				});
 			}

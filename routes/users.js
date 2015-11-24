@@ -32,10 +32,8 @@ exports.users = function(params) {
 						}, 'id').exec(function(err, insertId){
 							if (err !== null) {
 								console.log(err);
-								res.redirect('/users');
-							} else {
-								res.redirect('/user/' + insertId);
 							}
+							res.redirect('/users');
 						});
 				} else {
 					var info = {
@@ -51,7 +49,7 @@ exports.users = function(params) {
 					params.db('users').update(info)
 						.where('id', req.params.idUser)
 						.exec(function() {
-							res.redirect('/user/' + req.params.idUser);
+							res.redirect('/users');
 						});
 				}
 			}
