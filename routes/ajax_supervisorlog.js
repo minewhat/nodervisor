@@ -83,9 +83,8 @@ exports.ajax_supervisorlog = function(params) {
 					}
 					break;
 					case 'clear': {
-							supclient.clearProcessLogs(process, function(err, data){
-									var d = new Array(err + data, 0, false);
-									res.send({result: 'success', data: d});
+							supclient.clearProcessLogs(process, function(){
+									res.send({result: 'success', data: new Array("", 0, false)});
 							});
 					}
 					break;

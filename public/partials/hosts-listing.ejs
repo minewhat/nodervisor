@@ -127,6 +127,7 @@ for (state in sortedstatuses) {
                             if (processes[i].statename == 'RUNNING') {
                                 %>
                                     <button type="button" class="btn btn-labeled btn-danger super-action" data-action="stop" data-process="<%= processFullname %>" data-host="<%= host.idHost %>"><span class="btn-label"><i class="glyphicon glyphicon-minus-sign"></i></span>Stop</button>
+                                    <button type="button" class="btn btn-labeled btn-warning super-action" data-action="restart" data-process="<%= processFullname %>" data-host="<%= host.idHost %>"><span class="btn-label"><i class="glyphicon glyphicon-repeat"></i></span>Restart</button>
                                 <%
                             } else if ((processes[i].statename == 'FATAL') || (processes[i].statename == 'STOPPED') || (processes[i].statename == 'EXITED')) {
                                 %>
