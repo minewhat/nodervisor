@@ -6,6 +6,9 @@
 
                 <article>
                     <h2>All Hosts</h2>
+                    <button type="button" id="collapse-toggle" class="btn pull-right " style="margin-top: -50px;margin-right: 158px;">
+                      <i class="glyphicon glyphicon-collapse-down"></i>
+                    </button>
                     <button type="button" id="refresh-toggle" class="btn btn-labeled btn-success active pull-right" style="margin-top: -50px;">
                         <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span>
                         <span class="btn-text">Refresh on</span>
@@ -62,6 +65,18 @@
             updateList();
             var updateInterval = setInterval('updateList()', 5000);
 
+            function collapseUp(o, table){
+                o.find('i').removeClass('glyphicon-collapse-down').addClass('glyphicon-collapse-up');
+                $("table[id='" + table + "']").toggle(true);
+                hostTablesCollapse[table] = 'up';
+            }
+
+            function collapseDown(o, table){
+                o.find('i').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
+                $("table[id='" + table + "']").toggle(false);
+                hostTablesCollapse[table] = 'down';
+            }
+
             $('#hosts-listing').on('click', '.super-action', function(){
                 var action = $(this).attr('data-action');
                 var process = $(this).attr('data-process');
@@ -86,13 +101,33 @@
             }).on('click', '.table-collapse', function(){
                 var table = $(this).attr('data-table');
                 if ($(this).find('i').hasClass('glyphicon-collapse-up')) {
-                    $(this).find('i').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
-                    $("table[id='" + table + "']").toggle(false);
-                    hostTablesCollapse[table] = 'down';
+                    collapseDown($(this), table);
                 } else {
+                    collapseUp($(this), table);
+                }
+
+				        var tableSize = $('table').size();
+                if ($('.glyphicon-collapse-up').size()===tableSize) {
+                    $('#collapse-toggle').find('i').removeClass('glyphicon-collapse-down').addClass('glyphicon-collapse-up');
+                } else if ($('.glyphicon-collapse-down').size()===tableSize) {
+                    $('#collapse-toggle').find('i').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
+                }
+            });
+
+            $('#collapse-toggle').on('click', function(){
+                var tables = $('#hosts-listing').find('.table');
+                if ($(this).find('i').hasClass('glyphicon-collapse-down')) {
                     $(this).find('i').removeClass('glyphicon-collapse-down').addClass('glyphicon-collapse-up');
-                    $("table[id='" + table + "']").toggle(true);
-                    hostTablesCollapse[table] = 'up';
+                    tables.each(function(){
+                      var id = $(this).attr('id');
+                      collapseUp($(".table-collapse[data-table='" + id + "']"), id);
+                    });
+                } else {
+                    $(this).find('i').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
+                    tables.each(function(){
+                      var id = $(this).attr('id');
+                      collapseDown($(".table-collapse[data-table='" + id + "']"), id);
+                    });
                 }
             });
 
@@ -113,6 +148,7 @@
                     refreshOn();
                 }
             });
+
         });
     </script>
 <%= include footer.ejs %>
