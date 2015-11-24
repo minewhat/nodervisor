@@ -67,6 +67,10 @@
                 var process = $(this).attr('data-process');
                 var host = $(this).attr('data-host');
 
+                if (!confirm("Are you sure to " + action.toUpperCase() + "?")) {
+                  return;
+                }
+
                 $.ajax({
                     url: '/ajax/supervisorctl',
                     type: 'get',
