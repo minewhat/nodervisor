@@ -33,7 +33,7 @@ footer {
     width: 100%;
 }
 
-body .wrapper {
+body > .wrapper {
     padding-bottom: 100px;
 }
 
