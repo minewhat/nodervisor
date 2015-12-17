@@ -11,7 +11,6 @@ textarea {
 }
 
 html, body {
-    height: 100%;
 }
 
 body {
@@ -19,6 +18,7 @@ body {
     line-height: 1.4;
     background-color: #fff;
     color: #1B1E2E;
+    position: relative;
 }
 
 footer {
@@ -30,16 +30,26 @@ footer {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -63px;
     width: 100%;
+}
+
+body > .wrapper {
+    padding-bottom: 100px;
+}
+
+body > .wrapper > .container {
+    padding-top: 63px;
+}
+
+body > .wrapper > .header-container {
+    height: 55px;
+    position: fixed;
+    width: 100%;
+    z-index: 3000;
 }
 
 .push {
     height: 63px;
-}
-/* not required for sticky footer; just pushes hero down a bit */
-.wrapper > .container {
-    /*padding-top: 63px;*/
 }
 
 ::-moz-selection {
@@ -103,6 +113,13 @@ body {
     border-bottom: 2px solid #133f52;
 }
 
+.footer-container {
+    bottom: 0;
+    height: 100px;
+    position: fixed;
+    width: 100%;
+}
+
 .footer-container,
 .main aside {
     border-top: 2px solid #133f52;
@@ -138,7 +155,6 @@ nav a {
     font-weight: bold;
 
     color: white;
-    /* background: #133f52; */
 }
 
 nav a:hover,
@@ -155,7 +171,7 @@ nav a:hover {
    ============== */
 
 .main {
-    padding: 30px 0;
+    /*padding: 30px 0;*/
     min-height: 100%;
 }
 
@@ -189,16 +205,27 @@ nav a:hover {
     padding-top: 5px;
 }
 
+.log-data-container {
+  padding-top: 50px;
+  position: relative;
+}
 
+.log-data-header {
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  z-index: 3001;
+}
 
+.log-data-header > h3 {
+  display: inline-block;
+}
 
-
-
-
-
-
-
-
+#log-data {
+  height: 100%;
+  /*position: absolute;*/
+  overflow: scroll;
+}
 
 
 /* ==========================================================================
@@ -213,7 +240,7 @@ nav a:hover {
 
     nav a {
         float: left;
-        width: 17%;
+        width: 13%;
         margin: 0 1.87%;
         padding: 12px 2%;
         margin-bottom: 0;
@@ -263,7 +290,7 @@ nav a:hover {
 
     nav {
         float: right;
-        width: 50%;
+        width: 55%;
     }
 
 /* ============
