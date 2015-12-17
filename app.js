@@ -14,6 +14,7 @@ var app = express();
 
 // Settings for all environments
 app.set('port', config.port);
+app.set('host', config.host);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('env', config.env);
@@ -63,6 +64,6 @@ var routes = require('./routes')({
 /**
  * Start Express Server
  */
-app.listen(app.get('port'), function(){
-	console.log('Nodervisor launched on port ' + app.get('port'));
+app.listen(app.get('port'), app.get('host'), function(){
+	console.log('Nodervisor launched on ' + app.get('host') + ':' + app.get('port'));
 });

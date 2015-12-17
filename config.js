@@ -44,6 +44,7 @@ config.sessionstore = {
 
 // Application env config
 config.port = process.env.PORT || 3000;
+config.host = process.env.HOST || '127.0.0.1';
 config.env = process.env.ENV || 'production';
 config.sessionSecret = process.env.SECRET || '1234567890ABCDEF';
 
