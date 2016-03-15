@@ -1,6 +1,8 @@
 /*
  * GET downloadctl page.
  */
+ var Convert = require('ansi-to-html');
+ var convert = new Convert();
 
 exports.ajax_supervisorlog = function(params) {
 	var config = params.config;
@@ -27,7 +29,9 @@ exports.ajax_supervisorlog = function(params) {
 								if (!err) {
 									offset = data[1] - length;
 									supclient.tailProcessStdoutLog(process, offset, length, function(err, data){
+										data[0] = convert.toHtml(data[0])
 										res.send({result: 'success', data: data});
+										console.log(data)
 									});
 								} else {
 									res.send({result: 'error', error: err});
@@ -40,6 +44,7 @@ exports.ajax_supervisorlog = function(params) {
 									length = data[1] - offset;
 									var log = data[0];
 									data[0] = log.substr(length * -1);
+									data[0] = convert.toHtml(data[0])
 									res.send({result: 'success', data: data});
 								} else {
 									res.send({result: 'error', error: err});
@@ -55,12 +60,13 @@ exports.ajax_supervisorlog = function(params) {
 									// If we dont know the offset to start, lets do two calls to fetch the current logsize and then offset
 									offset = data[1] - length;
 									supclient.tailProcessStderrLog(process, offset, length, function(err, data){
+										data[0] = convert.toHtml(data[0])
 										res.send({result: 'success', data: data});
 									});
 								} else {
 									res.send({result: 'error', error: err});
 								}
-								
+
 							});
 						} else {
 							supclient.tailProcessStderrLog(process, offset, length, function(err, data){
