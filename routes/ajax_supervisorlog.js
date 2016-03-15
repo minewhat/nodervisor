@@ -31,7 +31,6 @@ exports.ajax_supervisorlog = function(params) {
 									supclient.tailProcessStdoutLog(process, offset, length, function(err, data){
 										data[0] = convert.toHtml(data[0])
 										res.send({result: 'success', data: data});
-										console.log(data)
 									});
 								} else {
 									res.send({result: 'error', error: err});
